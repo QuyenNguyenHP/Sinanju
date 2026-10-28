@@ -9,6 +9,7 @@
 # to ensure consistent timestamps across all registers.
 #     - scheduling uses run_threaded() helper for non-blocking execution,
 #       interval changed to 2 seconds (was 5 seconds in v8.3).
+# changes: PORT Turbo charger exhaust gas out temperature 1 To: PORT Turbo charger exhaust gas out
 # *  by Quyen on 2026-03-11.
 # -----------------------
 import datetime
@@ -75,7 +76,7 @@ STBD_REGISTER_MAP = {
     0x4E: ("STBD Exhaust gas average temperature", "deg C"),
     0x50: ("STBD Turbo charger exhaust gas average in temperature 1", "deg C"),
     0x52: ("STBD Turbo charger exhaust gas average in temperature 2", "deg C"),
-    0x54: ("STBD Turbo charger exhaust gas out temperature 1", "deg C"),
+    0x54: ("STBD Turbo charger exhaust gas out", "deg C"),
     0x56: ("STBD Reduction gear LO pressure", "MPa"),
     0x58: ("STBD Reduction gear LO temperature", "deg C"),
     0x5A: ("STBD Reduction gear LO high temperature", "deg C"),
@@ -84,11 +85,11 @@ STBD_REGISTER_MAP = {
     0x60: ("STBD Shaft thrust bearing high temperature", "deg C"),
     0x62: ("STBD Shaft thrust bearing slowdown", "deg C"),
     0x64: ("STBD Reduction gear oil tank level", "Low = 1.0 Normal = 0.0"),
-    0x66: ("STBD Reduction gear standby Lo pump overlap run", "Abnormal = 1.0 Normal = 0.0"),
-    0x68: ("STBD Reduction gear LO low pressure shutdown", "Abnormal = 1.0 Normal = 0.0"),
-    0x6A: ("STBD Reduction gear LO low pressure shutdown line break", "Abnormal = 1.0 Normal = 0.0"),
-    0x6C: ("STBD Reduction gear standby LO pump overload", "Abnormal = 1.0 Normal = 0.0"),
-    0x6E: ("STBD Reduction gear LO pump auto start", "Abnormal = 1.0 Normal = 0.0"),
+    0x66: ("STBD Reduction gear standby Lo pump overlap run", "1=Abnormal or 0=Normal"),
+    0x68: ("STBD Reduction gear LO low pressure shutdown", "1=Abnormal or 0=Normal"),
+    0x6A: ("STBD Reduction gear LO low pressure shutdown line break", "1=Abnormal or 0=Normal"),
+    0x6C: ("STBD Reduction gear standby LO pump overload", "1=Abnormal or 0=Normal"),
+    0x6E: ("STBD Reduction gear LO pump auto start", "1=Abnormal or 0=Normal"),
 }
 
 # PORT Register mapping: address -> (description, unit)
@@ -135,7 +136,7 @@ PORT_REGISTER_MAP = {
     0x116: ("PORT Exhaust gas average temperature", "deg C"),
     0x118: ("PORT Turbo charger exhaust gas average in temperature 1", "deg C"),
     0x11A: ("PORT Turbo charger exhaust gas average in temperature 2", "deg C"),
-    0x11C: ("PORT Turbo charger exhaust gas out temperature 1", "deg C"),
+    0x11C: ("PORT Turbo charger exhaust gas out", "deg C"),
     0x11E: ("PORT Reduction gear LO pressure", "MPa"),
     0x120: ("PORT Reduction gear LO temperature", "deg C"),
     0x122: ("PORT Reduction gear LO high temperature", "deg C"),
@@ -144,11 +145,11 @@ PORT_REGISTER_MAP = {
     0x128: ("PORT Shaft thrust bearing high temperature", "deg C"),
     0x12A: ("PORT Shaft thrust bearing slowdown", "deg C"),
     0x12C: ("PORT Reduction gear oil tank level", "Low = 1.0 Normal = 0.0"),
-    0x12E: ("PORT Reduction gear standby Lo pump overlap run", "Abnormal = 1.0 Normal = 0.0"),
-    0x130: ("PORT Reduction gear LO low pressure shutdown", "Abnormal = 1.0 Normal = 0.0"),
-    0x132: ("PORT Reduction gear LO low pressure shutdown line break", "Abnormal = 1.0 Normal = 0.0"),
-    0x134: ("PORT Reduction gear standby LO pump overload", "Abnormal = 1.0 Normal = 0.0"),
-    0x136: ("PORT Reduction gear LO pump auto start", "Abnormal = 1.0 Normal = 0.0"),
+    0x12E: ("PORT Reduction gear standby Lo pump overlap run", "1=Abnormal or 0=Normal"),
+    0x130: ("PORT Reduction gear LO low pressure shutdown", "1=Abnormal or 0=Normal"),
+    0x132: ("PORT Reduction gear LO low pressure shutdown line break", "1=Abnormal or 0=Normal"),
+    0x134: ("PORT Reduction gear standby LO pump overload", "1=Abnormal or 0=Normal"),
+    0x136: ("PORT Reduction gear LO pump auto start", "1=Abnormal or 0=Normal"),
 }
 
 
@@ -256,7 +257,7 @@ except KeyboardInterrupt:
 except Exception as e:
     print(f"\nFatal error: {e}")
 finally:
-    print("Marine Rose Modbus Logger Stopped")
+    print("Marine Selena Modbus Logger Stopped")
 
     
         

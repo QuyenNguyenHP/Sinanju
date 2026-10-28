@@ -1,0 +1,134 @@
+mkdir csv zip asc archive scripts
+
+1=======================================================
+sudo nano /etc/systemd/system/modbus_testing.service
+
+[Unit]
+Description=modbus
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/drums/testing/scripts/pymodbusV8.4_Selena.py
+Restart=always
+
+[Install]
+WantedBy=default.target
+
+2 =======================================================
+sudo nano /etc/systemd/system/zip_tesing.service
+
+[Unit]
+Description=Encrypt Zip Files
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/drums/testing/scripts/zip_csv.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+3=======================================================
+sudo nano /etc/systemd/system/encrypt_testing.service
+
+[Unit]
+Description=Encrypt Zip Files
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/drums/testing/scripts/encrypt_zip_file.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+4 =======================================================
+sudo nano /etc/systemd/system/send_asc_testing.service
+
+[Unit]
+Description=Send ASC Files Service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/drums/testing/scripts/send_asc_scp.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+=======================================================
+
+
+python3 ~/testing/scripts/pymodbusV8.4_Selena.py
+python3 ~/testing/scripts/zip_csv.py
+sudo python3 ~/testing/scripts/encrypt_zip_file.py
+sudo python3 ~/testing/scripts/send_asc_scp.py
+
+
+sudo systemctl daemon-reload
+
+================disable==============================
+sudo systemctl disable modbus_testing.service 
+sudo systemctl disable zip_tesing.service 
+sudo systemctl disable encrypt_testing.service
+sudo systemctl disable send_asc_testing.service
+
+===============enable==============================
+sudo systemctl enable modbus_testing.service 
+sudo systemctl enable zip_tesing.service 
+sudo systemctl enable encrypt_testing.service
+sudo systemctl enable send_asc_testing.service
+
+================status=================================
+sudo systemctl status modbus_testing.service 
+sudo systemctl status zip_tesing.service 
+sudo systemctl status encrypt_testing.service
+sudo systemctl status send_asc_testing.service
+
+================start==================================
+sudo systemctl start modbus_testing.service 
+sudo systemctl start zip_tesing.service 
+sudo systemctl start encrypt_testing.service
+sudo systemctl start send_asc_testing.service
+
+===============restart==================================
+sudo systemctl restart modbus_testing.service 
+sudo systemctl restart zip_tesing.service 
+sudo systemctl restart encrypt_testing.service
+sudo systemctl restart send_asc_testing.service
+
+===============stop====================================
+sudo systemctl stop modbus_testing.service 
+sudo systemctl stop zip_tesing.service 
+sudo systemctl stop encrypt_testing.service
+sudo systemctl stop send_asc_testing.service
+
+===============journalctl====================================
+journalctl -u send_asc_testing.service -n 1000
+journalctl -u zip_tesing.service
+journalctl -u encrypt_testing.service
+journalctl -u send_asc_testing.service
+
+
+
+sudo systemctl stop encrypt_testing.service
+
+nano ~/testing/scripts/encrypt_zip_file.py
+
+
+rm ~/testing/scripts/encrypt_zip_file.py
+
+cd ~/testing/archive
+cd ~/testing/csv
+
+
+
+send_asc_csp.service
+
+sudo systemctl restart modbus.service 
+sudo systemctl restart zip_tesing.service 
+sudo systemctl restart encrypt_testing.service
+sudo systemctl restart send_asc_csp.service
